@@ -130,6 +130,7 @@
   (protobuf LogEntry data-map))
 
 (defn process-file-2 [filename output-file]
+  (do (println (str "Output file is: " output-file))
   (let [rdr (java.io.BufferedReader. (java.io.FileReader. filename))
 ;;        wrr (java.io.BufferedWriter. (java.util.zip.GZIPOutputStream. (java.io.ByteArrayOutputStream. (java.io.FileWriter. "test.pb"))))
         wr  (-> (java.io.FileOutputStream. output-file)
@@ -160,7 +161,7 @@
 ;;                (.writeLong wrr size)
 ;;                (.write wrr data-bytes))
               (recur xs (inc n))))
-          (.close wr))))))
+          (.close wr)))))))
 
 (defn test-2 []
   (process-file-2 "/home/mael/src/log/test.log" "test.pb"))
