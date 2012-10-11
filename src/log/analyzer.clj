@@ -1,8 +1,8 @@
 (ns log.analyzer
   (:use protobuf.core)
   (:use log.common)
-  (:use [clj-time.core :as clj-time])
-  (:use [clj-histogram core histo1d]))
+  (:use [clj-time.core :as clj-time]))
+;;  (:use [clj-histogram core histo1d]))
 
 (defn make-date [d]
   (let [s (:second d)
