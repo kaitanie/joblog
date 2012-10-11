@@ -14,7 +14,7 @@
     (let [command (first args)
           params (rest args)]
       (cond (= command "convert") (let [source (first params)
-                                        target (first (first params))]
+                                        target (first (rest params))]
                                     (process-file-2 source target))
             (= command "countjobs") (let [datafile (first params)
                                       totaljobs (process-data-try-catch "/home/mael/src/log/log/korundi.pb" (log.analyzer.TotalJobs.))]
