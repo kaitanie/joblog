@@ -68,10 +68,10 @@
           (not (nil? (floats   kw))) (fn [x] (Float/parseFloat x))
           (not (nil? (dates    kw))) (fn [x] (protobuf DateEntry (parse-sge-date   x)))
           (not (nil? (mem-unit kw))) (fn [x] (Float/parseFloat (->> x
-                                                                    reverse
-                                                                    rest
-                                                                    reverse
-                                                                    (apply str))))
+                                                                   reverse
+                                                                   rest
+                                                                   reverse
+                                                                   (apply str))))
           true                       identity))) ;; Fallthrough case: just string
 
 (defn parse-sge-attr-line
@@ -126,27 +126,27 @@
         xs (rest (drop-while #(not (.contains % separator)) txt))] ;; Drop also the separator
     [x xs]))
 
-(defn serialize-jobentry [data-map]
+(defn serialize-jobentry
+  "Turn data map containing all SGE job log entries into a protobuf
+  object."
+  [data-map]
   (protobuf LogEntry data-map))
 
-(defn process-file-2 [filename output-file]
+(defn process-file-2
+  "Read all entries from the SGE log dump and write them to a binary
+   file as length prefix framed messages."
+  [filename output-file]
   (do (println (str "Output file is: " output-file))
   (let [rdr (java.io.BufferedReader. (java.io.FileReader. filename))
-;;        wrr (java.io.BufferedWriter. (java.util.zip.GZIPOutputStream. (java.io.ByteArrayOutputStream. (java.io.FileWriter. "test.pb"))))
         wr  (-> (java.io.FileOutputStream. output-file)
-;;                                           java.util.zip.GZIPOutputStream.
                                            java.io.BufferedOutputStream.
                                            java.io.DataOutputStream.)
         wrr wr
-;;        wrr                                (com.google.protobuf.CodedOutputStream/newInstance wr)
-;;                                           java.io.OutputStreamWriter.
-;;                                           java.io.BufferedWriter.)
         lines (line-seq rdr)
         data-lines (take-while #(not (.contains % "Total System Usage")) (rest lines))]
     (loop [dat data-lines
            n   0]
       (let [[x xs] (split-text-block-at-line-containing-lazy "==========" dat)]
-;;      (let [[x xs] (split-text-block-at-line-containing "==========" dat)] ;; Crashes with NPE... :(
         (if (> (count x) 0)
           (do
             (let [d          (parse-sge-attr-block x)
@@ -156,10 +156,6 @@
                 (println (str "Processing entry " n)))
               (do
                 (.writeDelimitedTo (serialize-jobentry d) wrr))
-;;                (.writeRawLittleEndian64 wrr size)
-;;                (.writeRawBytes wrr data-bytes))
-;;                (.writeLong wrr size)
-;;                (.write wrr data-bytes))
               (recur xs (inc n))))
           (.close wr)))))))
 
@@ -182,5 +178,4 @@
 ;;         data-lines (rest lines)] ;; Drop the first line since it contains the separator
 ;;     (loop [text-remaining data-lines]
 ;;       (let [first-line (first text-remaining)]
-;;         (cond (.contains fist-line "Total System Usage") 
-
+;;         (cond (.contains fist-line "Total System Usage")
