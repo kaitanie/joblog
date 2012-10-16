@@ -1,10 +1,8 @@
 &(executable="./convert-korundi.sh")
+(jobName=convert-korundi)
 (cpuTime="3 hours")
 (notify="be kaitanie@cc.helsinki.fi")
-(jobName=convert-korundi)
-(inputFiles=("accounting-korundi-since-2008-01-01.log" "srm://srm.fgi.csc.fi/dpm/fgi.csc.fi/home/fgi.csc.fi/kaitanie/accounting-korundi-since-2008-01-01.log")
-("log-0.1.0-SNAPSHOT-standalone-alcyone.jar" "log-0.1.0-SNAPSHOT-standalone-alcyone.jar"))
+(inputFiles=("accounting-korundi-since-2008-01-01.log" "srm://srm.fgi.csc.fi/dpm/fgi.csc.fi/home/fgi.csc.fi/kaitanie/accounting-korundi-since-2008-01-01.log"))
 (outputFiles=("accounting-korundi-since-2008-01-01.pb" "srm://srm.fgi.csc.fi/dpm/fgi.csc.fi/home/fgi.csc.fi/kaitanie/accounting-korundi-since-2008-01-01.pb"))
 (stdout=stdout)
 (stderr=stderr)
-
