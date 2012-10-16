@@ -7,7 +7,7 @@
 ;;                 [clj-histogram "0.0.1-SNAPSHOT"]
                  [clj-time "0.4.4"]
                  [org.clojure/tools.nrepl "0.2.0-beta9"]
-                 [midje "1.5.0-SNAPSHOT"]
+                 [midje "1.4.0"]
                  [protobuf "0.6.1"]]
   :plugins [[lein-protobuf "0.2.1"]
             [lein-midje "2.0.0-SNAPSHOT"]]
