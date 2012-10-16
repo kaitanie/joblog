@@ -11,12 +11,12 @@ message Date {
 message Joblog {
   required string qname = 1;
   required string hostname = 2;
-  /*  required string groupstr = 3; */
+  required string group = 3;
   required string owner = 4;
   required string project = 5;
   required string department = 6;
   required string jobname = 7;
-  required uint64 jobnumber = 8;
+  required int64 jobnumber = 8;
   required string taskid = 9;
   required string account = 10;
   required int64 priority = 11;
@@ -27,9 +27,9 @@ message Joblog {
   required int64 slots = 16;
   required string failed = 17;
   required int64 exit_status = 18;
-  required float ru_wallclock = 19;
-  required float ru_utime = 20;
-  required float ru_stime = 21;
+  required double ru_wallclock = 19;
+  required double ru_utime = 20;
+  required double ru_stime = 21;
   required int64 ru_maxrss = 22;
   required int64 ru_ixrss = 23;
   required int64 ru_ismrss = 24;
@@ -45,11 +45,9 @@ message Joblog {
   required int64 ru_nsignals = 34;
   required int64 ru_nvcsw = 35;
   required int64 ru_nivcsw = 36;
-  required int64 cpu = 37;
-  required float mem = 38;
-  required float io = 39;
-  required float iow = 40;
-  required float maxvmem = 41;
+  required double cpu = 37;
+  required double mem = 38;
+  required double io = 39;
+  required double iow = 40;
+  required double maxvmem = 41;
 }
-
-
