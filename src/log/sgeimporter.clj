@@ -65,13 +65,14 @@
         dates     #{:end_time :qsub_time :start_time}
         mem-unit  #{:maxvmem}]
     (cond (not (nil? (ints     kw))) (fn [x] (Integer/parseInt x))
-          (not (nil? (floats   kw))) (fn [x] (Float/parseFloat x))
-          (not (nil? (dates    kw))) (fn [x] (protobuf DateEntry (parse-sge-date   x)))
-          (not (nil? (mem-unit kw))) (fn [x] (Float/parseFloat (->> x
-                                                                   reverse
-                                                                   rest
-                                                                   reverse
-                                                                   (apply str))))
+          (not (nil? (floats   kw))) (fn [x] (Double/parseDouble x))
+;;          (not (nil? (dates    kw))) (fn [x] (protobuf DateEntry (parse-sge-date   x)))
+          (not (nil? (dates    kw))) (fn [x] (parse-sge-date   x))
+          (not (nil? (mem-unit kw))) (fn [x] (Double/parseDouble (->> x
+                                                                     reverse
+                                                                     rest
+                                                                     reverse
+                                                                     (apply str))))
           true                       identity))) ;; Fallthrough case: just string
 
 (defn parse-sge-attr-line
