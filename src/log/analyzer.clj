@@ -1,7 +1,7 @@
 (ns log.analyzer
   (:use protobuf.core)
   (:use log.common)
-  (:use [clj-time.core :as clj-time]))
+  (:require  [clj-time.core :as ct]))
 ;;  (:use [clj-histogram core histo1d]))
 
 (defn make-date [d]
@@ -11,7 +11,7 @@
         day  (:day d)
         month (:month d)
         year (:year d)]
-    (clj-time/date-time year month day h m s)))
+    (ct/date-time year month day h m s)))
 
 ;;(defn job-length-minutes
 
