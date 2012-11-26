@@ -1,5 +1,5 @@
 (ns log.sgeimporter
-  (:use protobuf.core
+  (:use flatland.protobuf.core
         log.common))
 
 (defn is-whitespace? [c]

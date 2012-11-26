@@ -1,8 +1,8 @@
 (ns log.analyzer
-  (:use protobuf.core)
+  (:use flatland.protobuf.core)
   (:use log.common)
-  (:require  [clj-time.core :as ct]))
-;;  (:use [clj-histogram core histo1d]))
+  (:require  [clj-time.core :as ct])
+  (:use [clj-histogram core histo1d]))
 
 (defn make-date [d]
   (let [s (:second d)
@@ -43,7 +43,7 @@
 (defn get-next-entry [rdr]
   (let [s (:io-stream rdr)]
     (try
-      (if-let [p (protobuf.core.PersistentProtocolBufferMap/parseDelimitedFrom LogEntry s)]
+      (if-let [p (flatland.protobuf.PersistentProtocolBufferMap/parseDelimitedFrom LogEntry s)]
         p
         {})
       (catch java.io.EOFException e

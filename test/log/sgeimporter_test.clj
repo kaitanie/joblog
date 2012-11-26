@@ -81,12 +81,12 @@ maxvmem      1.475G")
 (defn check-field [description fname]
   (do
     (fact description (not (nil? (fname protobuf-sge-entry-1))) => true)
-    ;; Dates are stored in maps that have different types (clojure.lang.PersistentHashMap vs protobuf.core.PersistentProtocolBufferMap)
+    ;; Dates are stored in maps that have different types (clojure.lang.PersistentHashMap vs flatland.protobuf.PersistentProtocolBufferMap)
     (if (not (fname #{:qsub_time :start_time :end_time}))
       (fact "Types match" (type (fname protobuf-sge-entry-1)) => (type (fname parsed-sge-entry-1)))
       (do
         (fact "Date types" (type (fname parsed-sge-entry-1)) => clojure.lang.PersistentHashMap)
-        (fact "Date types" (type (fname protobuf-sge-entry-1)) => protobuf.core.PersistentProtocolBufferMap)))
+        (fact "Date types" (type (fname protobuf-sge-entry-1)) => flatland.protobuf.PersistentProtocolBufferMap)))
     (fact (str "Checking field " fname) (fname protobuf-sge-entry-1) => (fname parsed-sge-entry-1))))
 
 (check-field ":group types match" :group)

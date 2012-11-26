@@ -1,5 +1,5 @@
 (ns log.common
-  (:use protobuf.core)
+  (:use flatland.protobuf.core)
   (:import Logv1$Joblog)
   (:import Logv1$Date))
 
